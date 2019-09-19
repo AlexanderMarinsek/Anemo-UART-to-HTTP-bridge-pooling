@@ -1,0 +1,22 @@
+
+# Ignore object files
+*.o
+
+# Ignore executable contents
+bin/*
+# Exception to the rule (keep directory)
+!bin/.gitkeep 
+
+# Ignore measurement data
+measurement/*
+*.json
+# Exception to the rule (keep directory)
+!measurement/.gitkeep 
+
+# Ignore logs
+*.log
+
+# Ignore Eclips' hidden directories and files
+.*
+!.git
+!.gitignore
