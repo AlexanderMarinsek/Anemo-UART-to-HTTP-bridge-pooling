@@ -28,7 +28,7 @@
 
 
 #ifndef DEBUG_REQUEST
-#define DEBUG_REQUEST (1)
+#define DEBUG_REQUEST (0)
 #endif
 
 /* Socket state codes */

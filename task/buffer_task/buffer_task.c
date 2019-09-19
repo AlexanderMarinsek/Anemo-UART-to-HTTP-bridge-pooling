@@ -96,7 +96,7 @@ int8_t buffer_task_run (void) {
             //printf("***%s***\n", json_incoming.str_buffer.buffer);
 
             /* Write JSON data to data storage buffer */
-            //str_fifo_write(fifo_buffers[1], json_incoming.str_buffer.buffer);
+            str_fifo_write(fifo_buffers[1], json_incoming.str_buffer.buffer);
 
             /* Write JSON data to requests buffer */
             str_fifo_write(fifo_buffers[2], json_incoming.str_buffer.buffer);

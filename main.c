@@ -34,9 +34,9 @@
 
 
 /* Pooling based tasks */
-int8_t (*task_ptrs[]) (void) =
-	//{&buffer_task_run, &request_task_run, &storage_task_run};
-    {&serial_task_run, &buffer_task_run, &request_task_run};
+int8_t (*task_ptrs[]) (void) = 
+    {&serial_task_run, &buffer_task_run, &request_task_run, &storage_task_run};
+    //{&serial_task_run, &buffer_task_run, &request_task_run};
 	//{&buffer_task_run};
 /* Get number of tasks */
 int8_t num_of_tasks = (sizeof(task_ptrs) / sizeof(task_ptrs[0]));
