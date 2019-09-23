@@ -4,6 +4,9 @@
 CC = gcc
 CFLAGS = -g -Wall -I.
 
+#Get current directory, convert to string and pass to C code
+CFLAGS += -DCURDIR=\"${CURDIR}\"
+
 # -- list of dependencies -> header files
 DEPS = 	fifo/fifo.h								\
 		timestamp/timestamp.h					\

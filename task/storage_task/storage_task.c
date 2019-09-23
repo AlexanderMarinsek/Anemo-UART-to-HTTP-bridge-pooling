@@ -45,12 +45,18 @@ int8_t storage_task_init_fifo (str_fifo_t **_fifo) {
 
 
 int8_t storage_task_init_file (char *_filename) {
-    /* Check length */
-    if (strlen(_filename) > FILENAME_STRING_LEN-1) {
+    /* Check length (enough space for abs. + rel. path) */
+    if (strlen(_filename) > FILENAME_STRING_LEN - strlen(CURDIR) - 1) {
         return -1;
     }
-	/* Copy to local string (including '/0') */
-    memcpy(filename, _filename, strlen(_filename)+1);
+
+    /* Copy base directory absolute path (obtained in makefile) */
+    memcpy(filename, CURDIR, strlen(CURDIR));
+	/* Copy measurement relative path (offset and including '/0') */
+    memcpy(filename+  strlen(CURDIR), _filename, strlen(_filename)+1);
+
+    printf("%s\n", filename);
+
     return 0;
 }
 

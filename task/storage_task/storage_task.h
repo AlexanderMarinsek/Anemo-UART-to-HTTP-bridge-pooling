@@ -17,7 +17,7 @@
 
 #define STORAGE_FIFO_BUF_SIZE       (10)
 #define STORAGE_FIFO_STR_SIZE       (FIFO_STRING_SIZE)
-#define FILENAME_STRING_LEN         64
+#define FILENAME_STRING_LEN         128
 
 
 /*  Init raw serial data fifo.

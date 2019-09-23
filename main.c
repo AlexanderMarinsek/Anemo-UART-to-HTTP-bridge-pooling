@@ -19,8 +19,9 @@
 #include <unistd.h>     /* Sleep */
 
 
+/* Relative path to measurement directory within base dir. */
+#define MEASUREMENTS_FILENAME               "/measurement/data.json"
 
-#define MEASUREMENTS_FILENAME               "./measurement/data.json"
 #define SERIAL_PORTNAME                     "/dev/ttyACM0"
 //#define SERVER_HOSTNAME                     "127.0.0.1"
 //#define SERVER_HOSTNAME                     "10.0.0.5"
@@ -93,9 +94,11 @@ int main (int argc, char* argv[]) {
         printf("Error: serial_init_fifo");
         return -1;
     }
+
+	//printf("%s\n", CURDIR);
     /* Init data storage file */
     if (storage_task_init_file(MEASUREMENTS_FILENAME) != 0) {
-        printf("Error: serial_init_port");
+        printf("Error: serial_init_data_storage");
         return -1;
     }
 
