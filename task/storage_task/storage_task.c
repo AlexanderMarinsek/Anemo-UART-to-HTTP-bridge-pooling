@@ -55,8 +55,6 @@ int8_t storage_task_init_file (char *_filename) {
 	/* Copy measurement relative path (offset and including '/0') */
     memcpy(filename+  strlen(CURDIR), _filename, strlen(_filename)+1);
 
-    printf("%s\n", filename);
-
     return 0;
 }
 

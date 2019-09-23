@@ -95,7 +95,6 @@ int main (int argc, char* argv[]) {
         return -1;
     }
 
-	//printf("%s\n", CURDIR);
     /* Init data storage file */
     if (storage_task_init_file(MEASUREMENTS_FILENAME) != 0) {
         printf("Error: serial_init_data_storage");
