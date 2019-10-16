@@ -563,7 +563,7 @@ int8_t _evaluate_socket(void) {
 
     /* Pointer to 'request_data_buf' substring inside of 'response_buf' */
     char *request_ok = strstr(response_buf, request_data_buf);
-    //char *request_ok = strstr(response_buf, "200 OK");
+    char *request_200 = strstr(response_buf, "200 OK");
     char *request_400 = strstr(response_buf, "400 Bad Request");
 
 #if(DEBUG_REQUEST==1)
@@ -571,15 +571,24 @@ int8_t _evaluate_socket(void) {
 		printf("*\tWITH\n%s\n", request_data_buf);
 #endif
 
-    /* Check if JSON syntax s correct.
-     * The first request after starting the app may contain missing chars.
-     * The missing chars are usually in the region 40-80 (hash-error) */
-    if (request_400 != NULL) {
-#if(DEBUG_REQUEST==1)
-		printf("*\tRESPONSE 400\n");
-#endif
-		printf( "\tReceived response code 400, continue with next request.\n"
-				"\tOriginal request:\n%s\n", request_buf);
+
+
+	if (request_200 != NULL) {
+		printf( "\nReceived response code 200, continue with next request.\n\n");
+	} else {
+    	/* Check if JSON syntax s correct.
+		 * The first request after starting the app may contain missing chars.
+		 * The missing chars are usually in the region 40-80 (hash-error) */
+		if (request_400 != NULL) {
+			printf( "\nReceived response code 400, "
+					"skip and continue with next request.\n\n");
+		} else {
+			printf("\nReceived non-200, non-400 response code - retry write.\n\n");
+		}
+		printf(
+			"\tOriginal request:\n%s\n"
+			"\tResponse:\n%s\n",
+			request_buf, response_buf);
     }
 
     /* Check, if match in string comparison exists */
