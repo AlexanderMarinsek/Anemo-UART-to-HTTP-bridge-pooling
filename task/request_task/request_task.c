@@ -309,18 +309,21 @@ int8_t _create_socket(void) {
     /* Catch error, which is not EINPROGRESS.
      * Normal: EINPROGRESS is thrown in non blocking operations
      */
-    if (sockfd == -1 && errno != EINPROGRESS) {
-		_report_socket_errno();
-        socket_state = SOCKET_STATE_CLOSE;
+    //if (sockfd == -1 && errno != EINPROGRESS) {
+    if (sockfd == -1) {
+    	if (errno != EINPROGRESS) {
+			_report_socket_errno();
+			socket_state = SOCKET_STATE_CLOSE;
+    	}
         return 0;
     }
 
     /* Catch refused error, because socket() returns positive on refused. */
-    if (errno == ECONNREFUSED) {
+    /*if (errno == ECONNREFUSED) {
 		_report_socket_errno();
         socket_state = SOCKET_STATE_CLOSE;
         return 0;
-    }
+    }*/
 
     /* Set to non blocking */
     int flags = fcntl(sockfd, F_GETFL, 0);
@@ -359,9 +362,12 @@ int8_t _connect_socket(void){
 #endif
 
     /* Catch error, which is not EINPROGRESS. */
-    if (connected == -1 && errno != EINPROGRESS) {
-		_report_socket_errno();
-        socket_state = SOCKET_STATE_CLOSE;
+    //if (connected == -1 && errno != EINPROGRESS) {
+    if (connected == -1) {
+    	if (errno != EINPROGRESS && errno != EALREADY) {
+			_report_socket_errno();
+			socket_state = SOCKET_STATE_CLOSE;
+    	}
         return 0;
     }
 
