@@ -28,7 +28,7 @@
 
 
 #ifndef DEBUG_REQUEST
-#define DEBUG_REQUEST (0)
+#define DEBUG_REQUEST (1)
 #endif
 
 /* Socket state codes */
@@ -63,7 +63,7 @@
 
 
 #define REQUEST_FMT                        					\
-    "POST /api/v1.0/measurement HTTP/1.1\r\n" 						\
+    "POST /api/v1.0/measurement/ HTTP/1.1\r\n" 						\
     "Host: %s\r\n" 											\
     "Content-Type: application/json; charset=utf-8\r\n" 	\
     "Content-Length: %lu\r\n\r\n" 							\

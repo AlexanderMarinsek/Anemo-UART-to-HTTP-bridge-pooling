@@ -154,6 +154,8 @@ int8_t request_task_init_socket(char *_host, int16_t portno) {
 
 #if(DEBUG_REQUEST==1)
 	printf("*\tSOCKET INITIATED\n");
+	printf("Host: %s\n", _host);
+	printf("Port: %d\n", portno);
 #endif
 
     return 0;
@@ -323,6 +325,7 @@ int8_t _create_socket(void) {
     /* Set to non blocking */
     int flags = fcntl(sockfd, F_GETFL, 0);
     fcntl(sockfd, F_SETFL, flags | O_NONBLOCK);
+    //fcntl(sockfd, F_SETFL, flags);
 
     /* Set socket state variable */
     socket_state = SOCKET_STATE_CONNECT;
@@ -432,10 +435,13 @@ int8_t _write_socket(void) {
     printf("errno: %d | %s\n", errno, strerror(errno));
 #endif
 
-	/* Normal: EINPROGRESS is thrown in non blocking operations */
-	if (result == -1 && errno != EINPROGRESS) {
-		_report_socket_errno();
-        socket_state = SOCKET_STATE_CLOSE;
+    /* Couldn't write, busy (non-blocking) */
+    if (result == -1) {
+    	/* Normal: EINPROGRESS, EAGAIN is thrown in non blocking operations */
+    	if (errno != EINPROGRESS && errno != EAGAIN) {
+			_report_socket_errno();
+			socket_state = SOCKET_STATE_CLOSE;
+    	}
 		return 0;
 	}
 
