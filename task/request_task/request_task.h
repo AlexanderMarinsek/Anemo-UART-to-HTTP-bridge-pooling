@@ -63,7 +63,7 @@
 
 
 #define REQUEST_FMT                        					\
-    "POST /measurement HTTP/1.1\r\n" 						\
+    "POST /api/v1.0/measurement HTTP/1.1\r\n" 						\
     "Host: %s\r\n" 											\
     "Content-Type: application/json; charset=utf-8\r\n" 	\
     "Content-Length: %lu\r\n\r\n" 							\
