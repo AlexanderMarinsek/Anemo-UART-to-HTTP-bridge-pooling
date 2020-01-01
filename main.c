@@ -22,7 +22,8 @@
 /* Relative path to measurement directory within base dir. */
 #define MEASUREMENTS_FILENAME               "/measurement/data.json"
 
-#define SERIAL_PORTNAME                     "/dev/ttyACM0"
+//#define SERIAL_PORTNAME                     "/dev/ttyACM0"
+#define SERIAL_PORTNAME                     "/dev/MeSt"
 //#define SERVER_HOSTNAME                     "127.0.0.1"
 //#define SERVER_HOSTNAME                     "10.0.0.51"
 //#define SERVER_HOSTNAME                     "165.22.19.241"
